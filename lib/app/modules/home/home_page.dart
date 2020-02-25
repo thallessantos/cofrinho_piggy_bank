@@ -29,7 +29,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 NeumorphicButton(icon: Icons.menu),
-                NeumorphicButton(icon: Icons.settings),
+                NeumorphicButton(icon: Icons.settings, onPressed: () => Modular.to.pushNamed('/settings')),
               ],
             ),
             _amountDisplay(),

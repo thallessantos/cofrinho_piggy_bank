@@ -15,16 +15,20 @@ abstract class AppUtils {
 
   static String doubleToBRL(double value, {withSymbol = true}) {
     final money = NumberFormat("#,##0.00", "pt_BR");
-    return (withSymbol ? "R\$ " : "") + money.format(value);
+    return (withSymbol ? "${getCurrencySymbol(BRL)} " : "") + money.format(value);
   }
 
   static String doubleToEUR(double value, {withSymbol = true}) {
     final money = NumberFormat("#,##0.00", "en_US");
-    return (withSymbol ? "\€ " : "") + money.format(value);
+    return (withSymbol ? "${getCurrencySymbol(EUR)} " : "") + money.format(value);
   }
 
   static String doubleToUSD(double value, {withSymbol = true}) {
     final money = NumberFormat("#,##0.00", "en_US");
-    return (withSymbol ? "\$ " : "") + money.format(value);
+    return (withSymbol ? "${getCurrencySymbol(USD)} " : "") + money.format(value);
+  }
+
+  static String getCurrencySymbol(String currency) {
+    return currency == EUR ? "\€" : (currency == USD ? "\$" : "R\$");
   }
 }
