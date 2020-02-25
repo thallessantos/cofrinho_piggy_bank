@@ -1,3 +1,4 @@
+import 'package:cofrinho_piggy_bank/app/app_controller.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_button.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_coin_button.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_display.dart';
@@ -18,6 +19,7 @@ class WithdrawPage extends StatefulWidget {
 
 class _WithdrawPageState extends ModularState<WithdrawPage, WithdrawController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final AppController _appController = Modular.get();
 
   Coin coinMultiply;
   bool canShowMultipliers = false;
@@ -79,7 +81,7 @@ class _WithdrawPageState extends ModularState<WithdrawPage, WithdrawController> 
               alignment: Alignment.centerRight,
               child: Observer(builder: (_) {
                 return Text(
-                  AppUtils.doubleToCurrency(controller.amount),
+                  AppUtils.doubleToCurrency(_appController.amount, currency: _appController.currency),
                   style: TextStyle(fontSize: 50, wordSpacing: 10),
                 );
               }),
@@ -92,7 +94,7 @@ class _WithdrawPageState extends ModularState<WithdrawPage, WithdrawController> 
 
   List<Widget> _coinButtons() {
     List<Widget> rows = [];
-    List<Coin> coins = controller.coins;
+    List<Coin> coins = _appController.coins;
 
     Widget _buildMultiplierButton(Coin c, int quantity) {
       return NeumorphicButton(

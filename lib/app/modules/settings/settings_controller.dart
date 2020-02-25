@@ -8,24 +8,5 @@ part 'settings_controller.g.dart';
 class SettingsController = _SettingsBase with _$SettingsController;
 
 abstract class _SettingsBase with Store {
-  final ILocalStorage _storage = Modular.get();
-  List<String> currencyList = AppUtils.currencyList;
 
-  @observable
-  String selectedCurrency;
-
-  _SettingsBase() {
-    init();
-  }
-
-  @action
-  init() async {
-    selectedCurrency = await _storage.getCurrency();
-  }
-
-  @action
-  changeCurrency(String currency) async {
-    await _storage.putCurrency(currency);
-    selectedCurrency = currency;
-  }
 }

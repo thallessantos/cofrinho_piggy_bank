@@ -12,7 +12,7 @@ import 'package:cofrinho_piggy_bank/app/modules/home/home_module.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-    Bind((i) => AppController()),
+    Bind((i) => AppController(), lazy: false),
     Bind((i) => LocalStorageHive()),
     Bind((i) => CoinService()),
   ];

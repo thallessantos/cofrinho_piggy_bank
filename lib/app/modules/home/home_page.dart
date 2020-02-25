@@ -1,3 +1,4 @@
+import 'package:cofrinho_piggy_bank/app/app_controller.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_button.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_display.dart';
 import 'package:cofrinho_piggy_bank/app/modules/home/home_controller.dart';
@@ -16,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  final AppController _appController = Modular.get();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +57,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               alignment: Alignment.centerRight,
               child: Observer(builder: (_) {
                 return Text(
-                  AppUtils.doubleToCurrency(controller.amount),
+                  AppUtils.doubleToCurrency(_appController.amount, currency: _appController.currency),
                   style: TextStyle(fontSize: 50, wordSpacing: 10),
                 );
               }),
@@ -86,8 +89,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
     return Observer(
       builder: (BuildContext context) {
-        if (controller.coins == null || controller.coins.isEmpty)
-          return CircularProgressIndicator();
+        if (_appController.coins == null || _appController.coins.isEmpty)
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.grey)),
+            ),
+          );
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -96,17 +105,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Expanded(child: _coinDisplay(height: 70, coin: controller.coins[0])),
-                  Expanded(child: _coinDisplay(height: 70, coin: controller.coins[1])),
+                  Expanded(child: _coinDisplay(height: 70, coin: _appController.coins[0])),
+                  Expanded(child: _coinDisplay(height: 70, coin: _appController.coins[1])),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  Expanded(child: _coinDisplay(height: 80, coin: controller.coins[2])),
-                  Expanded(child: _coinDisplay(height: 80, coin: controller.coins[3])),
+                  Expanded(child: _coinDisplay(height: 80, coin: _appController.coins[2])),
+                  Expanded(child: _coinDisplay(height: 80, coin: _appController.coins[3])),
                 ],
               ),
-              _coinDisplay(height: 90, coin: controller.coins[4]),
+              _coinDisplay(height: 90, coin: _appController.coins[4]),
             ],
           ),
         );
@@ -125,14 +134,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
              text: "Retirar",
              width: 150,
              color: Colors.redAccent,
-             onPressed: () => Modular.to.pushNamed('/withdraw').then((_) => controller.getData()),
+             onPressed: () => Modular.to.pushNamed('/withdraw'),
            ),
            NeumorphicButton(
              icon: Icons.add_box,
              text: "Depositar",
              width: 150,
              color: Colors.green,
-             onPressed: () => Modular.to.pushNamed('/deposit').then((_) => controller.getData()),
+             onPressed: () => Modular.to.pushNamed('/deposit'),
            ),
          ],
        ),

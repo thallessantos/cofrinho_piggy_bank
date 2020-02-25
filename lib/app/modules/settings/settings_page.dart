@@ -1,3 +1,4 @@
+import 'package:cofrinho_piggy_bank/app/app_controller.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_button.dart';
 import 'package:cofrinho_piggy_bank/app/components/neumorphic_display.dart';
 import 'package:cofrinho_piggy_bank/app/modules/settings/settings_controller.dart';
@@ -15,6 +16,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends ModularState<SettingsPage, SettingsController> {
+  final AppController _appController = Modular.get();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +56,8 @@ class _SettingsPageState extends ModularState<SettingsPage, SettingsController> 
 
   Widget _buildCurrencyOptions() {
     List<Widget> options = [];
-    controller.currencyList.forEach((c) {
-      if (c == controller.selectedCurrency) {
+    AppUtils.currencyList.forEach((c) {
+      if (c == _appController.currency) {
         options.add(NeumorphicDisplay(
           height: 50,
           width: 100,
@@ -65,7 +68,7 @@ class _SettingsPageState extends ModularState<SettingsPage, SettingsController> 
         options.add(NeumorphicButton(
           width: 100,
           text: AppUtils.getCurrencySymbol(c),
-          onPressed: () => controller.changeCurrency(c),
+          onPressed: () => _appController.updateCurrency(c),
         ));
       }
     });
