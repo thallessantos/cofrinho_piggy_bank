@@ -47,7 +47,7 @@ class _DepositPageState extends ModularState<DepositPage, DepositController> {
                       Text("Depositar", style: TextStyle(fontSize: 20, color: Colors.green)),
                     ],
                   ),
-                  NeumorphicButton(icon: Icons.info_outline),
+                  NeumorphicButton(icon: Icons.help_outline),
                 ],
               ),
               _amountDisplay(),

@@ -50,7 +50,7 @@ class _WithdrawPageState extends ModularState<WithdrawPage, WithdrawController> 
                       Text("Retirar", style: TextStyle(fontSize: 20, color: Colors.redAccent)),
                     ],
                   ),
-                  NeumorphicButton(icon: Icons.info_outline),
+                  NeumorphicButton(icon: Icons.help_outline),
                 ],
               ),
               _amountDisplay(),

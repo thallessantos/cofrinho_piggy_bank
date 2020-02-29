@@ -19,7 +19,7 @@ abstract class AppUtils {
   }
 
   static String doubleToEUR(double value, {withSymbol = true}) {
-    final money = NumberFormat("#,##0.00", "en_US");
+    final money = NumberFormat("#,##0.00", "eu");
     return (withSymbol ? "${getCurrencySymbol(EUR)} " : "") + money.format(value);
   }
 

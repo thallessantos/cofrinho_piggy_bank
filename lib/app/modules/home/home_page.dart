@@ -18,11 +18,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   final AppController _appController = Modular.get();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.grey[200],
+      drawer: _drawerMenu(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,7 +34,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                NeumorphicButton(icon: Icons.menu),
+                NeumorphicButton(icon: Icons.menu, onPressed: () => _scaffoldKey.currentState.openDrawer()),
                 NeumorphicButton(icon: Icons.settings, onPressed: () => Modular.to.pushNamed('/settings')),
               ],
             ),
@@ -39,6 +42,22 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             _coinsDisplays(),
             Spacer(),
             _actionButtons(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _drawerMenu() {
+    return Drawer(
+      child: Container(
+        color: Colors.grey[200],
+        child: ListView(
+          children: <Widget>[
+            NeumorphicButton(icon: Icons.history, text: "Histórico", color: Colors.blueAccent, onPressed: () => Modular.to.pushNamed("/history"),),
+            NeumorphicButton(icon: Icons.gavel, text: "Quebrar Cofrinho", color: Colors.red),
+            NeumorphicButton(icon: Icons.stars, text: "Avaliar o app", color: Colors.amber),
+            NeumorphicButton(icon: Icons.info, text: "Sobre"),
           ],
         ),
       ),

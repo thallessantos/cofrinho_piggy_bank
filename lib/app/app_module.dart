@@ -1,5 +1,6 @@
 import 'package:cofrinho_piggy_bank/app/app_controller.dart';
 import 'package:cofrinho_piggy_bank/app/modules/deposit/deposit_module.dart';
+import 'package:cofrinho_piggy_bank/app/modules/history/history_module.dart';
 import 'package:cofrinho_piggy_bank/app/modules/settings/settings_module.dart';
 import 'package:cofrinho_piggy_bank/app/modules/withdraw/withdraw_module.dart';
 import 'package:cofrinho_piggy_bank/app/shared/services/coin_service.dart';
@@ -23,6 +24,7 @@ class AppModule extends MainModule {
     Router('/settings', module: SettingsModule(), transition: TransitionType.fadeIn),
     Router('/deposit', module: DepositModule(), transition: TransitionType.fadeIn),
     Router('/withdraw', module: WithdrawModule(), transition: TransitionType.fadeIn),
+    Router('/history', module: HistoryModule(), transition: TransitionType.fadeIn),
   ];
 
   @override
